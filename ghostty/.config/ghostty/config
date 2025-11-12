@@ -1,0 +1,33 @@
+# font-family = FiraCode Nerd Font
+# font-family = "MesloLGS Nerd Font Mono"
+# font-family = "JetBrainsMono Nerd Font"
+# font-family = "MonoLisa"
+# font-family = "Cascadia Code"
+font-family = "CaskaydiaCove Nerd Font"
+# font-family = "Liberation Mono"
+# font-family = "Noto Sans Mono"
+#
+# font-style = "Regular"
+# font-style = "bold"
+
+
+# theme = catppuccin-mocha
+# theme = tokyonight_night
+theme = Cobalt2
+# custom-shader = ghostty-shaders/in-game-crt.glsl
+
+adjust-cell-height = 6
+window-decoration = none
+gtk-titlebar-hide-when-maximized = true
+background-opacity = 0.60
+background-blur = true
+font-size = 11
+
+background = #000000
+
+cursor-color = #f5457c
+
+# fullscreen=true
+window-padding-x = 5
+# window-padding-y = 0
+# window-padding-color = background
