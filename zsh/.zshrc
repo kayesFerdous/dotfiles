@@ -11,6 +11,14 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -78,6 +86,7 @@ plugins=(
   zsh-completions
   history-substring-search
   vi-mode
+  you-should-use
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -110,6 +119,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 alias cl="clear"
 alias vi="nvim"
+
+#git aliases
+alias gst="git status"
+alias gs="git switch"
+alias ga="git add"
+alias gaa="git add ."
+
+# docker aliases
+alias ds="sudo systemctl start docker"
+alias dst="sudo systemctl stop docker docker.socket"
 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
