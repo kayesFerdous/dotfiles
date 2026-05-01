@@ -17,7 +17,8 @@ theme = Cobalt2
 # custom-shader = ghostty-shaders/in-game-crt.glsl
 
 adjust-cell-height = 6
-window-decoration = none
+window-decoration = client
+gtk-titlebar = true
 gtk-titlebar-hide-when-maximized = true
 background-opacity = 0.60
 background-blur = true

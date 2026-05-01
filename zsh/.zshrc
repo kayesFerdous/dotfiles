@@ -118,7 +118,8 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 alias cl="clear"
-alias vi="nvim"
+alias nv="nvim"
+alias anti="antigravity"
 
 #git aliases
 alias gst="git status"
@@ -129,10 +130,23 @@ alias gaa="git add ."
 # docker aliases
 alias ds="sudo systemctl start docker"
 alias dst="sudo systemctl stop docker docker.socket"
+alias dc="docker compose"
 
-# alias zshconfig="mate ~/.zshrc"
+#ollama
+alias os="sudo systemctl start ollama"
+alias ost="sudo systemctl stop ollama"
+
+alias zshconfig="source ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 . "$HOME/.local/bin/env"
 eval "$(starship init zsh)"
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+
+# bun completions
+[ -s "/home/kayes/.bun/_bun" ] && source "/home/kayes/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
