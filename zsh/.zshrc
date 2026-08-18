@@ -1,6 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/home/kayes/development/flutter/bin"
+# Flutter (location differs per machine; only add if present)
+[ -d "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
+
+# User-local binaries
+export PATH="$HOME/.local/bin:$PATH"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -89,7 +93,7 @@ plugins=(
   you-should-use
 )
 
-source $ZSH/oh-my-zsh.sh
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -128,23 +132,34 @@ alias ga="git add"
 alias gaa="git add ."
 
 # docker aliases
-alias ds="sudo systemctl start docker"
-alias dst="sudo systemctl stop docker docker.socket"
 alias dc="docker compose"
 
-#ollama
-alias os="sudo systemctl start ollama"
-alias ost="sudo systemctl stop ollama"
+# service control: systemd on Linux, Docker.app / brew services on macOS
+if [[ "$OSTYPE" == linux* ]]; then
+  alias ds="sudo systemctl start docker"
+  alias dst="sudo systemctl stop docker docker.socket"
+  alias os="sudo systemctl start ollama"
+  alias ost="sudo systemctl stop ollama"
+elif [[ "$OSTYPE" == darwin* ]]; then
+  alias ds="open -a Docker"
+  alias dst="osascript -e 'quit app \"Docker\"'"
+  alias os="brew services start ollama"
+  alias ost="brew services stop ollama"
+fi
 
 alias zshconfig="source ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-. "$HOME/.local/bin/env"
-eval "$(starship init zsh)"
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+command -v starship >/dev/null && eval "$(starship init zsh)"
+if [[ "$OSTYPE" == darwin* ]]; then
+  export CHROME_EXECUTABLE="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+else
+  export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+fi
 
 # bun completions
-[ -s "/home/kayes/.bun/_bun" ] && source "/home/kayes/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
