@@ -30,5 +30,9 @@ cursor-color = #f5457c
 
 # fullscreen=true
 window-padding-x = 5
+
+# tmux handles tabs/projects; attach to (or create) the "home" session.
+command = /usr/bin/tmux new-session -A -s home
+window-show-tab-bar = never
 # window-padding-y = 0
 # window-padding-color = background
